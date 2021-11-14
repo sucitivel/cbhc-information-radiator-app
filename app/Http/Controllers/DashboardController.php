@@ -35,7 +35,7 @@ class DashboardController extends Controller
         }
 
         return view('dashboard', [
-            'dailySchedule' => $dailySchedule,
+            'events' => $this->generateCalendarEventArray($dailySchedule),
         ]);
     }
 
@@ -50,12 +50,12 @@ class DashboardController extends Controller
             $tasks = preg_filter('/^/', $roomLabel . ' ', $tasks);
 
             if (isset($schedule[$timeBasis + $time])) {
-                $schedule[$timeBasis + $time] = array_merge(
+                $schedule[$timeBasis + $time]['tasks'] = array_merge(
                     $schedule[$timeBasis + $time],
                     $tasks
                 );
             } else {
-                $schedule[$timeBasis + $time] = $tasks;
+                $schedule[$timeBasis + $time] = ['tasks' => $tasks];
             }
         }
     }
@@ -73,9 +73,26 @@ class DashboardController extends Controller
                 ];
             } else {
                 $schedule[$roomLabel][$timeBasis + $time] = [
+                    'tasks'   => [],
                     'feeding' => $item[2],
                 ];
             }
         }
+    }
+
+    private function generateCalendarEventArray($schedule)
+    {
+        $arrangedByDate = [];
+
+        foreach ($schedule as $time => $dayEvents) {
+            foreach ($dayEvents as $event) {
+                $arrangedByDate[] = (object) [
+                    'title' => $event,
+                    'start' => date('Y-m-d', $time),
+                ];
+            }
+        }
+
+        return $arrangedByDate;
     }
 }

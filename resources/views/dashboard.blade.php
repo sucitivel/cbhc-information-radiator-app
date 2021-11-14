@@ -1,5 +1,8 @@
 @extends('layouts.page')
 @section('content')
+  <script>
+    var myEvents = {!! json_encode($events) !!};
+  </script>
   <div class="py-10">
     <header>
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">

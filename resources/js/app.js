@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
+    events: myEvents,
     initialDate: new Date(),
     navLinks: true, // can click day/week names to navigate views
     editable: false,
