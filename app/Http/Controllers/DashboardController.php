@@ -34,8 +34,6 @@ class DashboardController extends Controller
             $this->generateRoomCalendar($loadTime, $checklistData, $room, $roomSchedule);
         }
 
-        dd($dailySchedule);
-
         return view('dashboard', [
             'dailySchedule' => $dailySchedule,
         ]);

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     initialDate: new Date(),
     navLinks: true, // can click day/week names to navigate views
-    editable: true,
+    editable: false,
     dayMaxEvents: true, // allow "more" link when too many events
   });
 
