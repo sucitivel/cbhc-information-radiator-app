@@ -85,7 +85,7 @@ class DashboardController extends Controller
         $arrangedByDate = [];
 
         foreach ($schedule as $time => $dayEvents) {
-            foreach ($dayEvents as $event) {
+            foreach ($dayEvents['tasks'] as $event) {
                 $arrangedByDate[] = (object) [
                     'title' => $event,
                     'start' => date('Y-m-d', $time),
