@@ -82,6 +82,7 @@ class ImportHoboData extends Command
         $hoboFtpFiles = opendir($this->sftpDir);
 
         while (false !== ($dumpFile = readdir($hoboFtpFiles))) {
+            $this->info('Importing ' . $dumpFile);
             $this->handleCsv($dumpFile);
         }
         return Command::SUCCESS;
@@ -95,8 +96,12 @@ class ImportHoboData extends Command
 
         while($row = fgetcsv(($csv))) {
             $insertArray = [];
-            foreach(self::ROOMS as $csvColumn => $roomReading) {
-                $insertArray[self::ROOMS[$csvColumn]['db_col']] = $row[self::ROOMS[$csvColumn]['csv_col']];
+            foreach(self::ROOMS as $roomReading) {
+                $insertArray = [
+                    'room_id'              => $roomReading['room_id'],
+                    'time'                 => strtotime($row[0]),
+                    $roomReading['db_col'] => $row[$roomReading['csv_col']]
+                ];
             }
             (new HoboDataPoint())->create($insertArray);
         }
