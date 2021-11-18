@@ -51,6 +51,7 @@ return [
             'username' => env('HOBO_DB_USERNAME', 'forge'),
             'password' => env('HOBO_DB_PASSWORD', ''),
             'unix_socket' => env('HOBO_DB_SOCKET', ''),
+            'data_dir' => env('HOBO_DATA_DIR', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

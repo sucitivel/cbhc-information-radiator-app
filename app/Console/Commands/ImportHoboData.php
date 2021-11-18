@@ -68,7 +68,7 @@ class ImportHoboData extends Command
      */
     public function __construct()
     {
-        $this->sftpDir = env('HOBO_DATA_DIR');
+        $this->sftpDir = config('database.connections.hobo.data_dir');
         parent::__construct();
     }
 
