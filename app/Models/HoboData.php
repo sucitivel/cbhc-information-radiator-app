@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HoboDataPoint extends Model
+class HoboData extends Model
 {
     use HasFactory;
 

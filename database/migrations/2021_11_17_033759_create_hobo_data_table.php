@@ -15,7 +15,10 @@ class CreateHoboDataTable extends Migration
     {
         Schema::connection('hobo')->create('hobo_data', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('room_id');
+            $table->dateTime('time');
+            $table->float('celcius', 3, 2);
+            $table->float('rh', 3, 2);
         });
     }
 

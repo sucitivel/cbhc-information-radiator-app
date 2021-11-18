@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\HoboDataPoint;
+use App\Models\HoboData;
 
 class ImportHoboData extends Command
 {
@@ -82,8 +82,8 @@ class ImportHoboData extends Command
         $hoboFtpFiles = opendir($this->sftpDir);
 
         while (false !== ($dumpFile = readdir($hoboFtpFiles))) {
-            $this->info('Importing ' . $dumpFile);
-            $this->handleCsv($dumpFile);
+            $this->info('Importing ' . $this->sftpDir . '/' . $dumpFile);
+            $this->handleCsv($this->sftpDir . '/' . $dumpFile);
         }
         return Command::SUCCESS;
     }
@@ -103,7 +103,7 @@ class ImportHoboData extends Command
                     $roomReading['db_col'] => $row[$roomReading['csv_col']]
                 ];
             }
-            (new HoboDataPoint())->create($insertArray);
+            (new HoboData())->create($insertArray);
         }
 
         unlink($dumpFile);
