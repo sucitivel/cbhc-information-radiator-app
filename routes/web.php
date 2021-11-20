@@ -16,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('dashboard.index');
 
+    Route::get('/rooms', 'App\Http\Controllers\RoomController@index')->name('room.index');
+
     Route::get('/oauth2', 'App\Http\Controllers\Oauth2Controller@receiveToken')->name('oauth2.receiveToken');
 });

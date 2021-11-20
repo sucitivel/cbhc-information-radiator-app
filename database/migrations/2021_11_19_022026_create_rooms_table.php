@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHoboDataTable extends Migration
+class CreateRoomsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateHoboDataTable extends Migration
      */
     public function up()
     {
-        Schema::connection('hobo')->create('hobo_data', function (Blueprint $table) {
+        Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('room_id');
-            $table->dateTime('time');
-            $table->float('celcius', 6, 2)->nullable();
-            $table->float('rh', 6, 2)->nullable();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +27,6 @@ class CreateHoboDataTable extends Migration
      */
     public function down()
     {
-        Schema::connection('hobo')->dropIfExists('hobo_data');
+        Schema::dropIfExists('rooms');
     }
 }

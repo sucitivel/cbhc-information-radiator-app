@@ -10,4 +10,12 @@ class HoboData extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public $timestamps = false;
+
+    public function room()
+    {
+        return $this->belongsTo(\App\Models\Room::class);
+    }
+
 }
