@@ -14,7 +14,7 @@ class Room extends Model
         return $this->hasMany(\App\Models\HoboData::class);
     }
 
-    public function getDataPointsAttribute()
+    public function getDataPointsFormattedAttribute()
     {
         $transformedDatapoints = [
             'temperature' => [],
