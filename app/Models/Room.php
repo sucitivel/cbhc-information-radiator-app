@@ -16,10 +16,24 @@ class Room extends Model
 
     public function getDataPointsAttribute()
     {
+        $transformedDatapoints = [
+            'temperature' => [],
+            'humidity' => [],
+        ];
         $dataPoints = $this->datapoints;
 
         foreach ($dataPoints as $dataPoint) {
-            // reform
+            $transformedDatapoints['temperature'] = [
+                'x' => $dataPoint->time,
+                'y' => $dataPoint->celcius,
+            ];
+
+            $transformedDatapoints['humidity'] = [
+                'x' => $dataPoint->time,
+                'y' => $dataPoint->rh,
+            ];
         }
+
+        return $transformedDatapoints;
     }
 }

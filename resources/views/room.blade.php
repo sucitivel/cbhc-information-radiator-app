@@ -1,14 +1,21 @@
 @extends('layouts.page')
 @section('content')
   <script>
-    var roomData = {!! json_encode($roomData) !!};
     // === include 'setup' then 'config' above ===
 
     const myChart = new Chart(
         document.getElementById('environment'),
         {
           type: 'line',
-          data: roomData,
+          data: {
+            datasets: [{
+                label: 'Humidity',
+                data:  {!! json_encode($room->data_points['humidity']) !!}
+            },{
+                label: 'Temperature',
+                data:  {!! json_encode($room->data_points['temperature']) !!}
+            }]
+          },
           options: {}
         }
     );
