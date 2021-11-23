@@ -18,5 +18,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/rooms', 'App\Http\Controllers\RoomController@index')->name('room.index');
 
+    Route::get('/room/{room}', 'App\Http\Controllers\RoomController@show')->name('room.show');
+
     Route::get('/oauth2', 'App\Http\Controllers\Oauth2Controller@receiveToken')->name('oauth2.receiveToken');
 });
