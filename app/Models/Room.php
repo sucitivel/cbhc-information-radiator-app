@@ -20,7 +20,7 @@ class Room extends Model
             'temperature' => [],
             'humidity' => [],
         ];
-        $dataPoints = $this->datapoints;
+        $dataPoints = $this->datapoints();
 
         foreach ($dataPoints as $dataPoint) {
             $transformedDatapoints['temperature'] = [

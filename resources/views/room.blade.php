@@ -2,23 +2,24 @@
 @section('content')
   <script>
     // === include 'setup' then 'config' above ===
-
-    const myChart = new Chart(
-        document.getElementById('environment'),
-        {
-          type: 'line',
-          data: {
-            datasets: [{
-                label: 'Humidity',
-                data:  {!! json_encode($room->data_points['humidity']) !!}
-            },{
-                label: 'Temperature',
-                data:  {!! json_encode($room->data_points['temperature']) !!}
-            }]
-          },
-          options: {}
-        }
-    );
+    document.addEventListener('DOMContentLoaded', function() {
+        const myChart = new Chart(
+            document.getElementById('environment'),
+            {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: 'Humidity',
+                    data:  {!! json_encode($room->data_points['humidity']) !!}
+                },{
+                    label: 'Temperature',
+                    data:  {!! json_encode($room->data_points['temperature']) !!}
+                }]
+            },
+            options: {}
+            }
+        );
+    });
   </script>
   <div class="py-10">
     <header>
