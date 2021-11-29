@@ -8,15 +8,18 @@
         {
         type: 'line',
         data: {
-          datasets: [{
+          datasets:
+          @foreach($rooms as $room)
+          [{
             label: 'Humidity',
             data:  {!! json_encode($room->data_points['humidity']) !!},
             backgroundColor: '#00f',
-        },{
+            },{
             label: 'Temperature',
             data:  {!! json_encode($room->data_points['temperature']) !!},
             backgroundColor: '#f00',
           }],
+          @endforeach
         },
         options: {}
         }
