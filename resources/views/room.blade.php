@@ -11,11 +11,12 @@
           datasets: [{
             label: 'Humidity',
             data:  {!! json_encode($room->data_points['humidity']) !!}
+            backgrounColor: 'blue',
         },{
             label: 'Temperature',
-            data:  {!! json_encode($room->data_points['temperature']) !!}
+            data:  {!! json_encode($room->data_points['temperature']) !!},
+            backgrounColor: 'red',
           }],
-          labels: [ 'Red', 'Blue'],
         },
         options: {}
         }
