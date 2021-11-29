@@ -23,6 +23,7 @@ class Room extends Model
 
         $dataPoints = \App\Models\HoboData::where('room_id', $this->id)
             ->where('time', '>', date('Y-m-d H:i:s', time() - 86400))
+            ->orderBy('time')
             ->get();
 
         foreach ($dataPoints as $dataPoint) {
