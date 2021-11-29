@@ -2,54 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Interfaces\RoomConstants;
 use Illuminate\Console\Command;
 use App\Models\HoboData;
 
-class ImportHoboData extends Command
+class ImportHoboData extends Command implements RoomConstants
 {
-    const ROOMS = [
-        1 => [
-            'room_id' => 2,
-            'csv_col' => 2,
-            'db_col'  => 'celcius'
-        ],
-        2 => [
-            'room_id' => 2,
-            'csv_col' => 3,
-            'db_col'  => 'rh'
-        ],
-        3 => [
-            'room_id' => 3,
-            'csv_col' => 5,
-            'db_col'  => 'celcius'
-        ],
-        4 => [
-            'room_id' => 3,
-            'csv_col' => 4,
-            'db_col'  => 'rh'
-        ],
-        5 => [
-            'room_id' => 4,
-            'csv_col' => 6,
-            'db_col'  => 'celcius'
-        ],
-        6 => [
-            'room_id' => 4,
-            'csv_col' => 7,
-            'db_col'  => 'rh'
-        ],
-        7 => [
-            'room_id' => 5,
-            'csv_col' => 8,
-            'db_col'  => 'celcius'
-        ],
-        8 => [
-            'room_id' => 5,
-            'csv_col' => 9,
-            'db_col'  => 'rh'
-        ],
-    ];
-
     protected $sftpDir;
 
     protected $signature = 'import:hobos';
@@ -114,9 +72,7 @@ class ImportHoboData extends Command
                         );
                     }
                 } catch (\Exception $e) {
-                    $this->error(var_export(array_merge($insertArray, [
-                        $roomReading['db_col'] => $row[$roomReading['csv_col']],
-                    ]), true));
+                    $this->error($e);
                 }
 
             }

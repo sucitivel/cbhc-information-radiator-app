@@ -14,21 +14,21 @@ class Room extends Model
         return $this->hasMany(\App\Models\HoboData::class);
     }
 
-    public function getDataPointsFormattedAttribute()
+    public function getDataPointsAttribute()
     {
         $transformedDatapoints = [
             'temperature' => [],
             'humidity' => [],
         ];
-        $dataPoints = $this->datapoints();
+        $dataPoints = \App\Models\HoboData::where('room_id', $this->id)->get();
 
         foreach ($dataPoints as $dataPoint) {
-            $transformedDatapoints['temperature'] = [
+            $transformedDatapoints['temperature'][] = [
                 'x' => $dataPoint->time,
                 'y' => $dataPoint->celcius,
             ];
 
-            $transformedDatapoints['humidity'] = [
+            $transformedDatapoints['humidity'][] = [
                 'x' => $dataPoint->time,
                 'y' => $dataPoint->rh,
             ];

@@ -39,8 +39,8 @@
         <div class="flex justify-between h-16">
           <div class="flex">
             <div class="flex items-center flex-shrink-0">
-              <img class="hidden w-auto h-8 lg:hidden" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
-              <img class="w-auto h-8 lg:block" src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg" alt="CBHC">
+              <img class="hidden w-auto h-8 lg:hidden" src="/images/logo-square.png" alt="hub@cbhc">
+              <img class="w-auto h-8 lg:block" src="/images/logo-square.png" alt="hub@cbhc">
             </div>
             <div class="sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
               <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->

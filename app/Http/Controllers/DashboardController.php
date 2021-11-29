@@ -1,12 +1,28 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Interfaces\RoomConstants;
 use Google\Service\Sheets as gSheets;
 use Illuminate\Http\Request;
 use App\Library\GoogleApi;
 
-class DashboardController extends Controller
+class DashboardController extends Controller implements RoomConstants
 {
+    private $filterMap = [
+        3 => [
+            'Room 2',
+            'Room 3',
+        ],
+        4 => [
+            'Room 7',
+            'Room 8',
+        ],
+        5 => [
+            'Room 5',
+            'Room 6',
+        ],
+    ];
+
     public function index(Request $request)
     {
         $client = $request->gClient;
@@ -16,7 +32,7 @@ class DashboardController extends Controller
         $spreadsheetId = '1_BQ4VZQcnQpjUVx6MnXAx6Xb77aRezFqtQ0JZfllSto';
         $checklistTab = 'Daily Grow Checklists';
         $harvestAndLoadingTab = 'Loading and Harvest';
-        $harvestAndLoadingRange = 'A6:C75';
+        $harvestAndLoadingRange = 'E6:G75';
         $checklistRange = 'A2:C57';
 
         $checklistData = $service->spreadsheets_values->get($spreadsheetId, $checklistTab . '!' . $checklistRange);
@@ -29,13 +45,26 @@ class DashboardController extends Controller
 
         foreach ($harvestAndLoadingData as $harvest) {
             $room = $harvest[0];
+
+            if ($request->input('room')) {
+                if (!in_array($room, $this->filterMap[$request->input('room')])) {
+                    continue;
+                }
+            }
+
             $loadTime = strtotime($harvest[1]);
             $this->generateCalendar($loadTime, $checklistData, $room, $dailySchedule);
             $this->generateRoomCalendar($loadTime, $checklistData, $room, $roomSchedule);
         }
 
+        $rooms = collect(self::ROOMS)->mapWithKeys(function($room) {
+            return [$room['room_label'] => $room['room_id']];
+        })->unique();
+
         return view('dashboard', [
             'events' => $this->generateCalendarEventArray($dailySchedule),
+            'rooms' => $rooms,
+            'selectedRoom' => $request->input('room'),
         ]);
     }
 
@@ -51,7 +80,7 @@ class DashboardController extends Controller
 
             if (isset($schedule[$timeBasis + $time])) {
                 $schedule[$timeBasis + $time]['tasks'] = array_merge(
-                    $schedule[$timeBasis + $time],
+                    $schedule[$timeBasis + $time]['tasks'],
                     $tasks
                 );
             } else {
