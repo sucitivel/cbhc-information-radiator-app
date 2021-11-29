@@ -14,7 +14,8 @@
         },{
             label: 'Temperature',
             data:  {!! json_encode($room->data_points['temperature']) !!}
-          }]
+          }],
+          labels: [ 'Red', 'Blue'],
         },
         options: {}
         }
