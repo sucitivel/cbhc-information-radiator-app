@@ -3,13 +3,13 @@
   <script>
     // === include 'setup' then 'config' above ===
     document.addEventListener('DOMContentLoaded', function() {
-      const myChart = new Chart(
-        document.getElementById('environment'),
+    @foreach($rooms as $room)
+      const myChart{{ $room->id }} = new Chart(
+        document.getElementById('environment{{ $room->id }}'),
         {
         type: 'line',
         data: {
           datasets:
-          @foreach($rooms as $room)
           [{
             label: 'Humidity',
             data:  {!! json_encode($room->data_points['humidity']) !!},
@@ -19,18 +19,17 @@
             data:  {!! json_encode($room->data_points['temperature']) !!},
             backgroundColor: '#f00',
           }],
-          @endforeach
         },
         options: {}
         }
       );
+    @endforeach
     });
   </script>
   <div class="py-10">
     <header>
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold leading-tight text-gray-900">
-          {{ $room->name }} Climate Statistics
           <form>
             <select onchange="this.form.submit()" name="room" class="float-right font-bold leading-tight text-gray-900">
                 <option value="">All Rooms</option>
@@ -46,9 +45,13 @@
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <!-- Replace with your content -->
         <!-- This example requires Tailwind CSS v2.0+ -->
-        <canvas id="environment">
+        @foreach($rooms as $room)
+        <h1 class="text-3xl font-bold leading-tight text-gray-900">
+            {{ $room->name }} Climate Statistics
+        </h1>
+        <canvas id="environment{{ $room->id }}">
         </canvas>
-
+        @endforeach
 
         <!-- /End replace -->
       </div>

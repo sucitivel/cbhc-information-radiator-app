@@ -7,10 +7,11 @@ use App\Models\Room;
 
 class RoomController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return view('room-index', [
-            'room' => Room::all(),
+            'rooms' => Room::all(),
+            'selectedRoom' => $request->input('room'),
         ]);
     }
 

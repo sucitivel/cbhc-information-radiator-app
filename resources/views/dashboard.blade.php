@@ -13,6 +13,7 @@
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
+        initialView: 'listWeek',
         events: myEvents,
         initialDate: new Date(),
         navLinks: true, // can click day/week names to navigate views

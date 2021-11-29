@@ -1,3 +1,29 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.selected {
+    @apply inline-flex
+    @apply items-center
+    @apply px-1
+    @apply pt-1
+    @apply text-sm
+    @apply font-medium
+    @apply text-gray-900
+    @apply border-b-2
+    @apply border-indigo-500
+}
+
+.unselected {
+    @apply inline-flex
+    @apply items-center
+    @apply px-1
+    @apply pt-1
+    @apply text-sm
+    @apply font-medium
+    @apply text-gray-500
+    @apply border-b-2
+    @apply border-transparent
+    @apply hover:border-gray-300
+    @apply hover:text-gray-700
+}
