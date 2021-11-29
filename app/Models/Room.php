@@ -20,7 +20,10 @@ class Room extends Model
             'temperature' => [],
             'humidity' => [],
         ];
-        $dataPoints = \App\Models\HoboData::where('room_id', $this->id)->get();
+
+        $dataPoints = \App\Models\HoboData::where('room_id', $this->id)
+            ->where('time', '>', date('Y-m-d H:i:s', time() - 86400))
+            ->get();
 
         foreach ($dataPoints as $dataPoint) {
             $transformedDatapoints['temperature'][] = [
